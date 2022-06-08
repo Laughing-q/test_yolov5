@@ -679,6 +679,7 @@ def xml_to_txt(xml_path):
     for ob in rot.getElementsByTagName("object"):
         cls = ob.getElementsByTagName('name')[0].firstChild.data
         cls = cls.strip()
+        print(classes, cls)
         if cls in classes:
             for i in range(len(classes)):
                 if cls == classes[i]:

@@ -1,6 +1,8 @@
 import json
-import os
 import xml.dom.minidom as minidom
+import argparse
+import glob
+import os
 
 def json_xml(json_path):
 	'''
@@ -130,6 +132,20 @@ def json_xml(json_path):
 	f = open(write_path, 'w',encoding='utf-8')
 	dom.writexml(f, addindent='    ', newl='\n',encoding='UTF-8')
 
+def parse_opt():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-d",
+        "--data",
+        type=str,
+        default="",
+        help="image dir or image file",
+    )
+    opt = parser.parse_args()
+    return opt
+
 if __name__ == '__main__':
-	json_path = "/home/yuge/data/kaola.json"
-	json_xml(json_path)
+    opt = parse_opt()
+    json_paths = glob.glob(os.path.join(opt.data, "*"))
+    for json_path in json_paths:
+        json_xml(json_path)
